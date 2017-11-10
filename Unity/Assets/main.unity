@@ -308,10 +308,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1478186105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a24793eead022cc42b8ea8bd8e206cd4, type: 3}
+  m_Script: {fileID: 11500000, guid: f49d641b89ae5a14bad6b35ff98fc5c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button_State: 0
+  "nuova_gravit\xE0": {x: 0, y: -9.8, z: 9.8}
 --- !u!65 &1478186110
 BoxCollider:
   m_ObjectHideFlags: 0

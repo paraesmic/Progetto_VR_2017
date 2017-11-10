@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonController : MonoBehaviour {
+public class GravitySwitch : MonoBehaviour {
 
 //    public bool button_State;
 //    private Collider coll;
-
+	public Vector3 nuova_gravità;
 
 
     // Use this for initialization
@@ -27,7 +27,7 @@ public class ButtonController : MonoBehaviour {
 //        {
 //            button_State = true;
             Debug.Log("Funziona e diventa true!");
-		Physics.gravity = new Vector3 (0, -9.8F, 9.8F);
+		Physics.gravity = nuova_gravità;
 //        }
 //        else
 //        {
