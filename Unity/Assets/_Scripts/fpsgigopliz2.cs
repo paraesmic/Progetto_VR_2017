@@ -41,6 +41,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+		private bool gravityup = false;
+		private Vector3 gravità_giù = new Vector3 (0,-9,0);
+		private Vector3 gravità_su = new Vector3 (0,9,0);
+		private Vector3 gravità_destra = new Vector3 (0,0,9);
+		//private Vector3 grav = Vector3.zero;
+		private float degree;
+		private float angle = 270;
+		private bool atterrato = false;
 
         // Use this for initialization
         private void Start()
@@ -61,26 +69,57 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-            RotateView();
-            // the jump state needs to read here to make sure it is not missed
+
+			
+			if (Input.GetMouseButtonDown (1) && gravityup == false) {
+				atterrato = false;
+				m_Jumping = true;
+				Physics.gravity = gravità_su;
+				gravityup = true;
+				//m_CharacterController.transform.Rotate (0, 0, 180);
+				//transform.Rotate (0, 0, 180*Time.deltaTime);
+				//ruota(0,0,180*Time.deltaTime);
+				degree=180;
+			} else if (Input.GetMouseButtonDown (1) && gravityup == true) {
+				atterrato = false;
+				m_Jump = true;
+				m_Jumping = true;
+				//ruota(0,0,180*Time.deltaTime);
+				//			transform.Rotate (0, 0, 180*Time.deltaTime);
+				//m_CharacterController.transform.Rotate (0,0,180);
+				Physics.gravity = gravità_giù;
+				gravityup = false;
+				degree = 0;
+			} else if (Input.GetMouseButtonDown (2) && gravityup == false) {
+				atterrato = false;
+				m_Jump = true;
+//				m_Jumping = true;
+				//ruota(0,0,180*Time.deltaTime);
+				//			transform.Rotate (0, 0, 180*Time.deltaTime);
+				//m_CharacterController.transform.Rotate (0,0,180);
+				Physics.gravity = gravità_destra;
+				degree = 90;
+			}
+
+			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler(0,angle,degree), Time.fixedDeltaTime*4);
+			//RotateView();
+			// the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
 
-            if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
-            {
-                StartCoroutine(m_JumpBob.DoBobCycle());
-                PlayLandingSound();
-                m_MoveDir.y = 0f;
-                m_Jumping = false;
-            }
-            if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)
-            {
-                m_MoveDir.y = 0f;
-            }
+//            if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
+//            {
+//                StartCoroutine(m_JumpBob.DoBobCycle());
+//                PlayLandingSound();
+//                m_Jumping = false;
+//            }
+//            if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)
+//            {
+//            }
 
-            m_PreviouslyGrounded = m_CharacterController.isGrounded;
+            //m_PreviouslyGrounded = m_CharacterController.isGrounded;
         }
 
 
@@ -94,36 +133,54 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
+
             float speed;
             GetInput(out speed);
             // always move along the camera forward as it is the direction that it being aimed at
-            Vector3 desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
 
-            // get a normal for the surface that is being touched to move along it
+             //get a normal for the surface that is being touched to move along it
+			Vector3 desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
             RaycastHit hitInfo;
-            Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-                               m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
-            desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
+			if (!gravityup) {
+				desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
+				Physics.SphereCast (transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
+					m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+			} else {
+				desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
+				Physics.SphereCast (transform.position, m_CharacterController.radius, Vector3.up, out hitInfo,
+					m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);	
+			}
+			desiredMove = Vector3.ProjectOnPlane (desiredMove, hitInfo.normal).normalized;
 
-            m_MoveDir.x = desiredMove.x * speed;
-            m_MoveDir.z = desiredMove.z * speed;
+			if ((hitInfo.collider.gameObject.tag == "Pedana") && (m_CollisionFlags == CollisionFlags.Below)) {
+				atterrato = false;
+			}
 
+			m_MoveDir.x = desiredMove.x*speed;
+			m_MoveDir.z = desiredMove.z*speed;
+				
 
-            if (m_CharacterController.isGrounded)
+			if (atterrato)
+//            if (m_CharacterController.isGrounded)
             {
                 m_MoveDir.y = -m_StickToGroundForce;
 
-                if (m_Jump)
-                {
-                    m_MoveDir.y = m_JumpSpeed;
-                    PlayJumpSound();
-                    m_Jump = false;
-                    m_Jumping = true;
-                }
+				if (m_Jump && gravityup) {
+					m_MoveDir.y = -m_JumpSpeed;
+//					PlayJumpSound ();
+					//m_Jump = false;
+					m_Jumping = true;
+				} else if (m_Jump && !gravityup) {
+					m_MoveDir.y = m_JumpSpeed;
+//					PlayJumpSound ();
+					//m_Jump = false;
+					m_Jumping = true;
+				}
+					
             }
             else
             {
-                m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
+				m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
             }
             m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
 
@@ -134,11 +191,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
 
-        private void PlayJumpSound()
-        {
-            m_AudioSource.clip = m_JumpSound;
-            m_AudioSource.Play();
-        }
+//        private void PlayJumpSound()
+//        {
+//            m_AudioSource.clip = m_JumpSound;
+//            m_AudioSource.Play();
+//        }
 
 
         private void ProgressStepCycle(float speed)
@@ -156,25 +213,24 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_NextStep = m_StepCycle + m_StepInterval;
 
-            PlayFootStepAudio();
+           // PlayFootStepAudio();
         }
 
 
-        private void PlayFootStepAudio()
-        {
-            if (!m_CharacterController.isGrounded)
-            {
-                return;
-            }
-            // pick & play a random footstep sound from the array,
-            // excluding sound at index 0
-            int n = Random.Range(1, m_FootstepSounds.Length);
-            m_AudioSource.clip = m_FootstepSounds[n];
-            m_AudioSource.PlayOneShot(m_AudioSource.clip);
-            // move picked sound to index 0 so it's not picked next time
-            m_FootstepSounds[n] = m_FootstepSounds[0];
-            m_FootstepSounds[0] = m_AudioSource.clip;
-        }
+//        private void PlayFootStepAudio()
+//        {
+//            if (!m_CharacterController.isGrounded)
+//            {
+//                return;
+//            }
+//            // pick & play a random footstep sound from the array,
+//            // excluding sound at index 0
+//            int n = Random.Range(1, m_FootstepSounds.Length);            m_AudioSource.clip = m_FootstepSounds[n];
+//            m_AudioSource.PlayOneShot(m_AudioSource.clip);
+//            // move picked sound to index 0 so it's not picked next time
+//            m_FootstepSounds[n] = m_FootstepSounds[0];
+//            m_FootstepSounds[0] = m_AudioSource.clip;
+//        }
 
 
         private void UpdateCameraPosition(float speed)
