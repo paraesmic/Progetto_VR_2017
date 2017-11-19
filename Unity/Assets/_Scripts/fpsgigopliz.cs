@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using System.Collections;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -78,7 +79,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			public float shellOffset; //reduce the radius by that ratio to avoid getting stuck in wall (a value of 0.1f is nice)
 		}
 
-
+		public float mousesensibility = 20f;
 		public Camera cam;
 		public MovementSettings movementSettings = new MovementSettings();
 		public MouseLook mouseLook = new MouseLook();
@@ -100,6 +101,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public bool atterrato = false;
 		public Vector3 gravità;
 		public Vector3 forze;
+		public float sensitivity=5.0f;
+		public float smoothing = 2.0f;
+		Vector2 rot;
+		Vector2 smoothV;
 
 
 		public Vector3 Velocity
@@ -132,6 +137,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 		private void Start()
 		{
+			Cursor.lockState = CursorLockMode.Locked;
 			m_RigidBody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
 			mouseLook.Init (transform, cam.transform);
@@ -141,12 +147,39 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 		private void Update()
 		{
-			//Seguire il mouse con la telecamera
-			//RotateView();
+			//camera mouse
+			var md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+
+			md = Vector2.Scale(md,new Vector2(sensitivity*smoothing,sensitivity*smoothing));
+			smoothV.x = Mathf.Lerp (smoothV.x, md.x, 1f / smoothing);
+			smoothV.y = Mathf.Lerp (smoothV.y, md.y, 1f / smoothing);
+			rot += smoothV;
+
+			//		float mouseX = Input.GetAxisRaw ("Mouse X");
+			//		float mouseY = Input.GetAxisRaw ("Mouse Y");
+			//		rot.x = mouseX * mousesensibility * 20f;
+			//		rot.y = mouseY * mousesensibility * 20f;
+			//
+			cam.transform.localRotation = Quaternion.AngleAxis (-rot.y, Vector3.right);
+			if (atterrato) {
+				transform.localRotation = Quaternion.AngleAxis (rot.x, Vector3.up);
+			}
 
 
+
+			if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
+			{
+				m_Jump = true;
+			}
+		}
+
+
+		private void FixedUpdate()
+		{
+			GroundCheck();
 			forze = m_RigidBody.velocity;
 			if (Input.GetMouseButtonDown (1) && gravityup == false) {
+				atterrato = false;
 				m_Jump = true;
 				atterrato = false;
 				Physics.gravity = gravità_su;
@@ -168,20 +201,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				gravità = gravità_destra;
 				gravità = new Vector3(0,0,-1);
 			}
-			//capriola in aria
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler(0,angle,degree), Time.fixedDeltaTime*3);
+
+			//capriola
+			transform.rotation = Quaternion.Lerp (transform.rotation, Quaternion.Euler (0, angle, degree), Time.fixedDeltaTime * 3);
 
 
-			if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
-			{
-				m_Jump = true;
-			}
-		}
-
-
-		private void FixedUpdate()
-		{
-			GroundCheck();
 			Vector2 input = GetInput();
 
 			if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
@@ -272,14 +296,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 		private void RotateView()
 		{
-			//avoids the mouse looking if the game is effectively paused
-			if (Mathf.Abs(Time.timeScale) < float.Epsilon) return;
+			//transform.Rotate (0f, rotY, 0f);
 
-			// get the rotation before it's changed
+
+//		{
+//			//avoids the mouse looking if the game is effectively paused
+//			if (Mathf.Abs(Time.timeScale) < float.Epsilon) return;
+//
+//			// get the rotation before it's changed
 //			float oldYRotation = transform.eulerAngles.y;
-
-			mouseLook.LookRotation (transform, cam.transform);
-
+//
+//			mouseLook.LookRotation (transform, cam.transform);
+//
 //			if (m_IsGrounded || advancedSettings.airControl)
 //			{
 //				// Rotate the rigidbody velocity to match the new direction that the character is looking
