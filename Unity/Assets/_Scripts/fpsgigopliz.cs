@@ -85,7 +85,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public MouseLook mouseLook = new MouseLook();
 		public AdvancedSettings advancedSettings = new AdvancedSettings();
 
-
+		private GameObject m_ciao;
 		private Rigidbody m_RigidBody;
 		private CapsuleCollider m_Capsule;
 		private float m_YRotation;
@@ -103,8 +103,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public Vector3 forze;
 		public float sensitivity=5.0f;
 		public float smoothing = 2.0f;
-		Vector2 rot;
+		public Vector2 rot;
 		Vector2 smoothV;
+		public Vector3 ladirezionechemiserve;
 
 
 		public Vector3 Velocity
@@ -140,7 +141,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			Cursor.lockState = CursorLockMode.Locked;
 			m_RigidBody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
-			mouseLook.Init (transform, cam.transform);
+			//mouseLook.Init (transform, cam.transform);
 			gravità = new Vector3(0, 1, 0);
 		}
 
@@ -155,17 +156,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			smoothV.y = Mathf.Lerp (smoothV.y, md.y, 1f / smoothing);
 			rot += smoothV;
 
+			rot.y = Mathf.Clamp (rot.y, -86f, 86f);
+
 			//		float mouseX = Input.GetAxisRaw ("Mouse X");
 			//		float mouseY = Input.GetAxisRaw ("Mouse Y");
 			//		rot.x = mouseX * mousesensibility * 20f;
 			//		rot.y = mouseY * mousesensibility * 20f;
 			//
 			cam.transform.localRotation = Quaternion.AngleAxis (-rot.y, Vector3.right);
-			if (atterrato) {
-				transform.localRotation = Quaternion.AngleAxis (rot.x, Vector3.up);
+			if (!atterrato) {
+				transform.localRotation = Quaternion.Lerp (transform.rotation, Quaternion.Euler (0, angle, degree), Time.fixedDeltaTime * 10);
+				rot.y = 0;
+			} else {
+				this.gameObject.transform.GetChild(0).localRotation = Quaternion.AngleAxis (rot.x, Vector3.up);
 			}
-
-
 
 			if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
 			{
@@ -181,7 +185,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			if (Input.GetMouseButtonDown (1) && gravityup == false) {
 				atterrato = false;
 				m_Jump = true;
-				atterrato = false;
 				Physics.gravity = gravità_su;
 				gravityup = true;
 				degree=180;
@@ -201,9 +204,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				gravità = gravità_destra;
 				gravità = new Vector3(0,0,-1);
 			}
-
-			//capriola
-			transform.rotation = Quaternion.Lerp (transform.rotation, Quaternion.Euler (0, angle, degree), Time.fixedDeltaTime * 3);
 
 
 			Vector2 input = GetInput();
@@ -242,10 +242,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					m_Jumping = true;
 				}
 
-//				if (!m_Jumping && Mathf.Abs(input.x) < float.Epsilon && Mathf.Abs(input.y) < float.Epsilon && m_RigidBody.velocity.magnitude < 1f)
-//				{
-//					m_RigidBody.Sleep();
-//				}
+				if (!m_Jumping && Mathf.Abs(input.x) < float.Epsilon && Mathf.Abs(input.y) < float.Epsilon && m_RigidBody.velocity.magnitude < 1f)
+				{
+					m_RigidBody.Sleep();
+				}
 			}
 			else
 			{
