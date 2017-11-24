@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pedana
   - controller
+  - Schermo
   layers:
   - Default
   - TransparentFX
