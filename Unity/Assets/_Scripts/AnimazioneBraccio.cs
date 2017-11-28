@@ -6,31 +6,30 @@ public class AnimazioneBraccio : MonoBehaviour
 {
 
     public bool BraccioSu = false;
-    // public float frame = 0;
     public Animator anim;
-    public Animation azione;
+    //public Animation azione;
 
-    public GameObject ajeje;  // per cambiare la variabile dello schermo -> renderlo invisibile quando non serve
+    public GameObject ajeje;
 
     // Use this for initialization
     void Start()
     {
-        anim.GetComponent<Animator>();
-        azione.GetComponent<Animation>();
-
-        ajeje = GameObject.Find("Schermo");
+       // anim.GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("1"))
+
+       // if (Input.GetKeyUp("1") == false)
+       //     anim.SetBool("uno", false);
+
+        if (Input.GetKeyDown("1") )
         {
             BraccioSu = true;
             anim.Play("up");
-            //if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !Animator.IsInTransition(0))
-            //    anim.Play("loop");
-
+       
             ajeje.GetComponent<ScriptSchermo>().IsOn = true;
 
         }
@@ -38,14 +37,15 @@ public class AnimazioneBraccio : MonoBehaviour
         if (Input.GetKeyUp("1"))
         {
             BraccioSu = false;
-            //anim.Play("down");
-            anim.SetTrigger("uno");
+           
+            anim.SetBool("uno",true);
+           
+            ajeje.GetComponent<ScriptSchermo>().IsOn = false;
         }
 
-        if (azione.IsPlaying("loop"))
-        {
-            ajeje.GetComponent<ScriptSchermo>().IsOn = true;
-        }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("down"))
+            anim.SetBool("uno", false);
+
 
 
     }
