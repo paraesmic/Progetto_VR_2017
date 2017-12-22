@@ -15,6 +15,8 @@ public class ScriptSchermo : MonoBehaviour {
     public Texture2D left;
     public Texture2D right;
 
+    
+
     // Use this for initialization
     void Start () {
         IsOn = false;
@@ -28,19 +30,23 @@ public class ScriptSchermo : MonoBehaviour {
         {
             if (i < 25)
             {
-                transform.localScale = new Vector3(i/1000f, i/1000f, i/500f);
+                transform.localScale = new Vector3(i/250f, i/250f, i/175f);
                 i++;
             }
             start = false;
 
-            if (Input.GetKeyDown("2") == true)
+            if (Input.GetKeyDown("down") == true)
                 currentRenderer.material.SetTexture("_MainTex", down);
-            if (Input.GetKeyDown("3") == true)
-                currentRenderer.material.SetTexture("_MainTex", up);
-            if (Input.GetKeyDown("4") == true)
+          //  if (Input.GetKeyDown("up") == true)
+           //     currentRenderer.material.SetTexture("_MainTex", up);
+            if (Input.GetKeyDown("left") == true)
                 currentRenderer.material.SetTexture("_MainTex", left);
-            if (Input.GetKeyDown("5") == true)
-                currentRenderer.material.SetTexture("_MainTex", right);
+            if (Input.GetKeyDown("right") == true)
+                currentRenderer.material.SetTexture("_MainTex", right); 
+            
+           
+            if (Input.mousePosition.x>640 && Input.mousePosition.y<360 )
+                currentRenderer.material.SetTexture("_MainTex", up);
         }
 
       
@@ -48,7 +54,7 @@ public class ScriptSchermo : MonoBehaviour {
         {
             if (i >= 0)
             {             
-                transform.localScale = new Vector3( ((2*j-i) / 1000f) , ((2*j- i) / 1000f), ((2*j- i) / 500f));
+                transform.localScale = new Vector3( ((2*j-i) / 250f) , ((2*j- i) / 250f), ((2*j- i) / 175f));
                 i--;
             }          
         }

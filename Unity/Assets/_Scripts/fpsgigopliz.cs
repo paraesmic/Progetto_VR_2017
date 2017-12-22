@@ -7,9 +7,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 {
 	[RequireComponent(typeof (Rigidbody))]
 	[RequireComponent(typeof (CapsuleCollider))]
+
 	public class fpsgigopliz : MonoBehaviour
 	{
-		[Serializable]
+        public GameObject ajeje;
+
+        [Serializable]
 		public class MovementSettings
 		{
 			public float ForwardSpeed = 8.0f;   // Speed when walking forward
@@ -108,6 +111,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public Vector3 ladirezionechemiserve;
 
 
+        public GameObject ajeje2;
+
+
 		public Vector3 Velocity
 		{
 			get { return m_RigidBody.velocity; }
@@ -154,7 +160,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			md = Vector2.Scale(md,new Vector2(sensitivity*smoothing,sensitivity*smoothing));
 			smoothV.x = Mathf.Lerp (smoothV.x, md.x, 1f / smoothing);
 			smoothV.y = Mathf.Lerp (smoothV.y, md.y, 1f / smoothing);
-			rot += smoothV;
+
+            if (ajeje.GetComponent<ScriptSchermo>().IsOn == true)
+                rot += smoothV/500;
+            else
+            rot += smoothV;
 
 			rot.y = Mathf.Clamp (rot.y, -86f, 86f);
 
@@ -182,21 +192,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		{
 			GroundCheck();
 			forze = m_RigidBody.velocity;
-			if (Input.GetMouseButtonDown (1) && gravityup == false) {
+			if (/*Input.GetMouseButtonDown (1)*/ Input.GetKeyDown("up") && ajeje.GetComponent<ScriptSchermo>().IsOn == true && gravityup == false) {
 				atterrato = false;
 				m_Jump = true;
 				Physics.gravity = gravità_su;
 				gravityup = true;
 				degree=180;
 				gravità = new Vector3(0,-1,0);
-			} else if (Input.GetMouseButtonDown (1) && gravityup == true) {
+			} else if (/*Input.GetMouseButtonDown (1)*/ Input.GetKeyDown("down") && ajeje.GetComponent<ScriptSchermo>().IsOn == true && gravityup == true) {
 				atterrato = false;
 				m_Jump = true;
 				Physics.gravity = gravità_giù;
 				gravityup = false;
 				degree = 0;
 				gravità = new Vector3(0,1,0);
-			} else if (Input.GetMouseButtonDown (2) && gravityup == false) {
+			} else if (/*Input.GetMouseButtonDown (2)*/Input.GetKeyDown("right") && ajeje.GetComponent<ScriptSchermo>().IsOn == true && gravityup == false) {
 				atterrato = false;
 				m_Jump = true;
 				Physics.gravity = gravità_destra;

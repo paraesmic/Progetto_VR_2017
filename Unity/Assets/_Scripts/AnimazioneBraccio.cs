@@ -25,7 +25,7 @@ public class AnimazioneBraccio : MonoBehaviour
        // if (Input.GetKeyUp("1") == false)
        //     anim.SetBool("uno", false);
 
-        if (Input.GetKeyDown("1") )
+        if (Input.GetKeyDown("tab") )
         {
             BraccioSu = true;
             anim.Play("up");
@@ -34,7 +34,7 @@ public class AnimazioneBraccio : MonoBehaviour
 
         }
 
-        if (Input.GetKeyUp("1"))
+        if (Input.GetKeyUp("tab"))
         {
             BraccioSu = false;
            
