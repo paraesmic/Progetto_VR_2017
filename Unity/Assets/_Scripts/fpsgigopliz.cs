@@ -10,7 +10,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 	public class fpsgigopliz : MonoBehaviour
 	{
-        public GameObject ajeje;
+        public GameObject oggettoSchermo;
 
         [Serializable]
 		public class MovementSettings
@@ -98,8 +98,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private Vector3 gravità_giù = new Vector3 (0,-9,0);
 		private Vector3 gravità_su = new Vector3 (0,9,0);
 		private Vector3 gravità_destra = new Vector3 (0,0,9);
-		//private Vector3 grav = Vector3.zero;
-		public float degree;
+        private Vector3 gravità_sinistra = new Vector3(0, 0, -9);
+
+        public float posizioneY;
+        public float posizioneX;
+       
+
+        //private Vector3 grav = Vector3.zero;
+        public float degree;
 		public float angle = 270;
 		public bool atterrato = false;
 		public Vector3 gravità;
@@ -111,7 +117,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public Vector3 ladirezionechemiserve;
 
 
-        public GameObject ajeje2;
+        //public GameObject ajeje2;
 
 
 		public Vector3 Velocity
@@ -154,14 +160,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 		private void Update()
 		{
-			//camera mouse
-			var md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+
+            posizioneY = Input.mousePosition.y;
+            posizioneX = Input.mousePosition.x;
+
+            //camera mouse
+            var md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
 			md = Vector2.Scale(md,new Vector2(sensitivity*smoothing,sensitivity*smoothing));
 			smoothV.x = Mathf.Lerp (smoothV.x, md.x, 1f / smoothing);
 			smoothV.y = Mathf.Lerp (smoothV.y, md.y, 1f / smoothing);
 
-            if (ajeje.GetComponent<ScriptSchermo>().IsOn == true)
+            if (oggettoSchermo.GetComponent<ScriptSchermo>().IsOn == true)
                 rot += smoothV/500;
             else
             rot += smoothV;
@@ -192,31 +202,43 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		{
 			GroundCheck();
 			forze = m_RigidBody.velocity;
-			if (/*Input.GetMouseButtonDown (1)*/ Input.GetKeyDown("up") && ajeje.GetComponent<ScriptSchermo>().IsOn == true && gravityup == false) {
+			if (oggettoSchermo.GetComponent<ScriptSchermo>().IsOn == false && 
+                oggettoSchermo.GetComponent<ScriptSchermo>().direzione == "up" && gravityup == false) {
 				atterrato = false;
 				m_Jump = true;
 				Physics.gravity = gravità_su;
 				gravityup = true;
 				degree=180;
 				gravità = new Vector3(0,-1,0);
-			} else if (/*Input.GetMouseButtonDown (1)*/ Input.GetKeyDown("down") && ajeje.GetComponent<ScriptSchermo>().IsOn == true && gravityup == true) {
+			} else if (oggettoSchermo.GetComponent<ScriptSchermo>().IsOn == false &&
+                oggettoSchermo.GetComponent<ScriptSchermo>().direzione == "down" && gravityup == true) {
 				atterrato = false;
 				m_Jump = true;
 				Physics.gravity = gravità_giù;
 				gravityup = false;
 				degree = 0;
 				gravità = new Vector3(0,1,0);
-			} else if (/*Input.GetMouseButtonDown (2)*/Input.GetKeyDown("right") && ajeje.GetComponent<ScriptSchermo>().IsOn == true && gravityup == false) {
+			} else if (oggettoSchermo.GetComponent<ScriptSchermo>().IsOn == false &&
+                oggettoSchermo.GetComponent<ScriptSchermo>().direzione == "right" && gravityup == false) {
 				atterrato = false;
 				m_Jump = true;
 				Physics.gravity = gravità_destra;
 				degree = 90;
 				gravità = gravità_destra;
 				gravità = new Vector3(0,0,-1);
-			}
+            }
+            else if (oggettoSchermo.GetComponent<ScriptSchermo>().IsOn == false &&
+                oggettoSchermo.GetComponent<ScriptSchermo>().direzione == "left" && gravityup == false) {
+                atterrato = false;
+                m_Jump = true;
+                Physics.gravity = gravità_sinistra;
+                degree = 270;
+                gravità = gravità_sinistra;
+                gravità = new Vector3(0, 0, 1);
+            }
 
 
-			Vector2 input = GetInput();
+            Vector2 input = GetInput();
 
 			if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
 			{

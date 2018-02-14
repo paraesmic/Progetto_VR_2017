@@ -9,7 +9,7 @@ public class AnimazioneBraccio : MonoBehaviour
     public Animator anim;
     //public Animation azione;
 
-    public GameObject ajeje;
+    public GameObject oggettoSchermo;
 
     // Use this for initialization
     void Start()
@@ -25,22 +25,22 @@ public class AnimazioneBraccio : MonoBehaviour
        // if (Input.GetKeyUp("1") == false)
        //     anim.SetBool("uno", false);
 
-        if (Input.GetKeyDown("tab") )
+        if (Input.GetMouseButtonDown(1) )
         {
             BraccioSu = true;
             anim.Play("up");
        
-            ajeje.GetComponent<ScriptSchermo>().IsOn = true;
+            oggettoSchermo.GetComponent<ScriptSchermo>().IsOn = true;
 
         }
 
-        if (Input.GetKeyUp("tab"))
+        if (Input.GetMouseButtonUp(1) )
         {
             BraccioSu = false;
            
             anim.SetBool("uno",true);
            
-            ajeje.GetComponent<ScriptSchermo>().IsOn = false;
+            oggettoSchermo.GetComponent<ScriptSchermo>().IsOn = false;
         }
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("down"))
