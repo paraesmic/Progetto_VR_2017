@@ -15,12 +15,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.001
-    second: {fileID: 2100000, guid: 6e84f261a5d650f4280fa6fbb5b5d7ed, type: 2}
+    second: {fileID: 2100000, guid: fb2f93f28f9a3404c8977d956b8114da, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.002
-    second: {fileID: 2100000, guid: 7d2a97ed10600664595691de1c011e68, type: 2}
+    second: {fileID: 2100000, guid: a9c1dd458d8bd42838d4f77f3c3421e6, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -67,7 +67,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

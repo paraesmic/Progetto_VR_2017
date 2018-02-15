@@ -11,3 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/main.unity
     guid: 25d78bf99b8effe46b556ab3d1a3e756
+  - enabled: 1
+    path: Assets/_Scenes/livello2.unity
+    guid: dfa55a3056c1d4e4eb7ada2889c44010
+  - enabled: 1
+    path: Assets/_Scenes/livello3.unity
+    guid: 470f08e9c0ca689478c0c8c381f69266
