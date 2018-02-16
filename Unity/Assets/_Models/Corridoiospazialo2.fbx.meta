@@ -1,0 +1,415 @@
+fileFormatVersion: 2
+guid: 13c54c0caa84d1049b8d703e344336c4
+timeCreated: 1518779740
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: BoxHandle
+    100002: BoxHandle.001
+    100004: Circle
+    100006: //RootNode
+    100008: Cube
+    100010: Cube.001
+    100012: Cube.002
+    100014: Cube.003
+    100016: Cube.004
+    100018: Cube.005
+    100020: Cube.006
+    100022: Cube.007
+    100024: Cube.008
+    100026: Cube.011
+    100028: door
+    100030: DoorHull
+    100032: DoorHull.001
+    100034: DoorHull.002
+    100036: Hull
+    100038: Hull.001
+    100040: Hull.002
+    100042: Hull.003
+    100044: Hull.004
+    100046: Hull.005
+    100048: Hull.005.frame
+    100050: PanelHolder
+    100052: PedanaSDx
+    100054: PedanaSopra
+    100056: PedanaSotto
+    100058: PedanaSotto.001
+    100060: PedanaSotto.002
+    100062: PedanaSotto.003
+    100064: PedanaSotto.004
+    100066: PedanaSotto.005
+    100068: PedanaSx
+    100070: pipe
+    100072: pipe.002
+    100074: PipeHandle
+    100076: PipeHolder
+    100078: PipeHolder.001
+    100080: PipeHolder.002
+    100082: PipeHolder.003
+    100084: PipeHolder.004
+    100086: PipeHolder.005
+    100088: Plane
+    100090: Point
+    100092: Scatola
+    100094: SmallPipe
+    100096: SmallPipe.001
+    100098: SmallPipe.002
+    100100: SmallPipe.003
+    100102: SquareCushionPipe
+    100104: SquareCushions
+    100106: VentBox
+    400000: BoxHandle
+    400002: BoxHandle.001
+    400004: Circle
+    400006: //RootNode
+    400008: Cube
+    400010: Cube.001
+    400012: Cube.002
+    400014: Cube.003
+    400016: Cube.004
+    400018: Cube.005
+    400020: Cube.006
+    400022: Cube.007
+    400024: Cube.008
+    400026: Cube.011
+    400028: door
+    400030: DoorHull
+    400032: DoorHull.001
+    400034: DoorHull.002
+    400036: Hull
+    400038: Hull.001
+    400040: Hull.002
+    400042: Hull.003
+    400044: Hull.004
+    400046: Hull.005
+    400048: Hull.005.frame
+    400050: PanelHolder
+    400052: PedanaSDx
+    400054: PedanaSopra
+    400056: PedanaSotto
+    400058: PedanaSotto.001
+    400060: PedanaSotto.002
+    400062: PedanaSotto.003
+    400064: PedanaSotto.004
+    400066: PedanaSotto.005
+    400068: PedanaSx
+    400070: pipe
+    400072: pipe.002
+    400074: PipeHandle
+    400076: PipeHolder
+    400078: PipeHolder.001
+    400080: PipeHolder.002
+    400082: PipeHolder.003
+    400084: PipeHolder.004
+    400086: PipeHolder.005
+    400088: Plane
+    400090: Point
+    400092: Scatola
+    400094: SmallPipe
+    400096: SmallPipe.001
+    400098: SmallPipe.002
+    400100: SmallPipe.003
+    400102: SquareCushionPipe
+    400104: SquareCushions
+    400106: VentBox
+    2300000: BoxHandle
+    2300002: BoxHandle.001
+    2300004: Circle
+    2300006: Cube
+    2300008: Cube.001
+    2300010: Cube.002
+    2300012: Cube.003
+    2300014: Cube.004
+    2300016: Cube.005
+    2300018: Cube.006
+    2300020: Cube.007
+    2300022: Cube.008
+    2300024: Cube.011
+    2300026: door
+    2300028: DoorHull
+    2300030: DoorHull.001
+    2300032: DoorHull.002
+    2300034: Hull
+    2300036: Hull.001
+    2300038: Hull.002
+    2300040: Hull.003
+    2300042: Hull.004
+    2300044: Hull.005
+    2300046: Hull.005.frame
+    2300048: PanelHolder
+    2300050: PedanaSDx
+    2300052: PedanaSopra
+    2300054: PedanaSotto
+    2300056: PedanaSotto.001
+    2300058: PedanaSotto.002
+    2300060: PedanaSotto.003
+    2300062: PedanaSotto.004
+    2300064: PedanaSotto.005
+    2300066: PedanaSx
+    2300068: pipe
+    2300070: pipe.002
+    2300072: PipeHandle
+    2300074: PipeHolder
+    2300076: PipeHolder.001
+    2300078: PipeHolder.002
+    2300080: PipeHolder.003
+    2300082: PipeHolder.004
+    2300084: PipeHolder.005
+    2300086: Plane
+    2300088: Scatola
+    2300090: SmallPipe
+    2300092: SmallPipe.001
+    2300094: SmallPipe.002
+    2300096: SmallPipe.003
+    2300098: SquareCushionPipe
+    2300100: SquareCushions
+    2300102: VentBox
+    3300000: BoxHandle
+    3300002: BoxHandle.001
+    3300004: Circle
+    3300006: Cube
+    3300008: Cube.001
+    3300010: Cube.002
+    3300012: Cube.003
+    3300014: Cube.004
+    3300016: Cube.005
+    3300018: Cube.006
+    3300020: Cube.007
+    3300022: Cube.008
+    3300024: Cube.011
+    3300026: door
+    3300028: DoorHull
+    3300030: DoorHull.001
+    3300032: DoorHull.002
+    3300034: Hull
+    3300036: Hull.001
+    3300038: Hull.002
+    3300040: Hull.003
+    3300042: Hull.004
+    3300044: Hull.005
+    3300046: Hull.005.frame
+    3300048: PanelHolder
+    3300050: PedanaSDx
+    3300052: PedanaSopra
+    3300054: PedanaSotto
+    3300056: PedanaSotto.001
+    3300058: PedanaSotto.002
+    3300060: PedanaSotto.003
+    3300062: PedanaSotto.004
+    3300064: PedanaSotto.005
+    3300066: PedanaSx
+    3300068: pipe
+    3300070: pipe.002
+    3300072: PipeHandle
+    3300074: PipeHolder
+    3300076: PipeHolder.001
+    3300078: PipeHolder.002
+    3300080: PipeHolder.003
+    3300082: PipeHolder.004
+    3300084: PipeHolder.005
+    3300086: Plane
+    3300088: Scatola
+    3300090: SmallPipe
+    3300092: SmallPipe.001
+    3300094: SmallPipe.002
+    3300096: SmallPipe.003
+    3300098: SquareCushionPipe
+    3300100: SquareCushions
+    3300102: VentBox
+    4300000: DoorHull.002
+    4300002: DoorHull.001
+    4300004: DoorHull
+    4300006: door
+    4300008: Cube.008
+    4300010: PedanaSotto.004
+    4300012: PedanaSotto.003
+    4300014: PedanaSotto.002
+    4300016: PedanaSotto.005
+    4300018: PanelHolder
+    4300020: SquareCushions
+    4300022: SmallPipe.001
+    4300024: SmallPipe
+    4300026: SquareCushionPipe
+    4300028: Cube.011
+    4300030: PipeHolder.005
+    4300032: PedanaSotto.001
+    4300034: Circle
+    4300036: Hull.005
+    4300038: Cube.007
+    4300040: Cube.002
+    4300042: pipe.002
+    4300044: PipeHandle
+    4300046: PipeHolder.003
+    4300048: PipeHolder.002
+    4300050: PipeHolder.001
+    4300052: VentBox
+    4300054: BoxHandle.001
+    4300056: BoxHandle
+    4300058: pipe
+    4300060: Hull.004
+    4300062: Hull.005.frame
+    4300064: Hull.003
+    4300066: Hull.002
+    4300068: Hull.001
+    4300070: Plane
+    4300072: PedanaSDx
+    4300074: PedanaSx
+    4300076: PedanaSopra
+    4300078: PedanaSotto
+    4300080: Scatola
+    4300082: Hull
+    10800000: Point
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BatteryTexture
+    second: {fileID: 2100000, guid: a3eecbbdcfd53f042b5e930c642778ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cushion
+    second: {fileID: 2100000, guid: 4a3ed8b5c453c524db0e8e81656de26c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CushionHolder
+    second: {fileID: 2100000, guid: d225ddf636117b943a8913787d5af664, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DoorMetal
+    second: {fileID: 2100000, guid: ab9df56495251744d8c120f609d4a29d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorMetal
+    second: {fileID: 2100000, guid: 3dd57eb90c1b7ca4d8280faa4dbf4247, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorTransparent
+    second: {fileID: 2100000, guid: 5e307af0bdcb51440aed43648b37effa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 6a635384754bdc84c9c099c8eb4410ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HullMetal
+    second: {fileID: 2100000, guid: 8aebc4546c1137347a0a20dabdf67263, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: d86a208524d8121469d9725cd8605f4f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: a3bb077d7b64644ec8a91fd36be000c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PanelWhite
+    second: {fileID: 2100000, guid: 399cba73782688942a0bb7bfebac6fcb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pipe
+    second: {fileID: 2100000, guid: dbc589d49982132478eb85fb558d193e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VentBlackPlastic
+    second: {fileID: 2100000, guid: 5c7632a9c7fed214cb2f78fa6754616e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VentMetal
+    second: {fileID: 2100000, guid: 0ec38e5cc3e451b49b20f4f39aa7de84, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hulllight
+    second: {fileID: 2100000, guid: 738c7fe4de84a614fbbcc750b57f2a36, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
